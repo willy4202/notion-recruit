@@ -5,8 +5,11 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080/",
         changeOrigin: true,
+        pathRewrite: {
+          "/api": "",
+        },
+        target: "https://api.notion.com/v1/",
       },
     },
   },

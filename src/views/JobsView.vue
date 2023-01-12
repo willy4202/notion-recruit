@@ -5,11 +5,6 @@
   </section>
 </template>
 <script>
-const { Client } = require("@notionhq/client");
-const notion = new Client({
-  auth: process.env.VUE_APP_INTEGRATION,
-});
-
 export default {
   name: "",
   components: {},
@@ -23,13 +18,7 @@ export default {
   created() {
     console.log(this.job_id);
   },
-  methods: {
-    getPages(database_id) {
-      notion.databases.query({
-        database_id,
-      });
-    },
-  },
+  methods: {},
   watch: {
     $route(to, from) {
       console.log(to);
