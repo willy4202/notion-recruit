@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@deraw/vue-cli-plugin-proxy": "^2.2.7",
     "@notionhq/client": "^2.2.3",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
