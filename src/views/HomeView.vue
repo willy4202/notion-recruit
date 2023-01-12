@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <section>
+    <h1>채용 공고</h1>
+    <h3>job lists</h3>
+  </section>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import notionClient from "@/mixins/notionCleint";
 
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+  name: "home",
+  mixins: [notionClient],
+  components: {},
+  data() {
+    return {
+      example: "",
+    };
+  },
+
+  mounted() {
+    this.getDatabase();
+    console.log(notionClient);
+  },
+
+  methods: {
+    async getDatabase() {
+      await notionClient.databases.query({
+        database_id: "1b129f2601944e4fad20849f53f5eab0",
+      });
+    },
+  },
+};
 </script>
