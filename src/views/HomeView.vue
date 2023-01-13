@@ -1,10 +1,19 @@
 <template>
   <section>
     <h1>채용 공고</h1>
-    <h3>job lists</h3>
-    <ul>
-      <li v-for="job in jobs" :key="job">
-        <router-link :to="job">{{ job }}</router-link>
+    <hr />
+    <LoadingSpinner v-if="isLoading"></LoadingSpinner>
+
+    <ul v-else>
+      <li v-for="job in notionDbList" :key="job.page_id">
+        <router-link :to="job.page_id">
+          <h2>{{ job.title }}</h2>
+          <div class="job-tag">
+            <span>{{ job.department }}</span>
+
+            <span>{{ job.team }}</span>
+          </div>
+        </router-link>
       </li>
     </ul>
   </section>
@@ -12,41 +21,82 @@
 
 <script>
 import notionClient from "@/mixins/notionCleint";
-
-const PROXY_API = "/api";
-const option = {
-  "Notion-Version": "2022-02-22",
-};
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 export default {
   name: "home",
   mixins: [notionClient],
-  components: {},
+  components: { LoadingSpinner },
   data() {
     return {
-      jobs: ["1", "2", "3", "4"],
+      notionDbList: [],
+      isLoading: true,
     };
   },
 
-  mounted() {
-    // this.getDatabase();
-    // console.log(notionClient.databases.query);
-    this.getDB();
+  created() {
+    this.getDatabaseList();
   },
 
+  updated() {},
   methods: {
-    async getDB() {
-      await fetch(
-        "/api/databases/1b129f2601944e4fad20849f53f5eab0/query",
-        option
-      ).then((res) => console.log(res));
+    async getDatabaseList() {
+      this.$axios.get("http://localhost:3000/jobs").then((res) => {
+        this.notionDbList = this.refinedData(res.data.results);
+        this.isLoading = false;
+      });
     },
 
-    async getDatabase() {
-      await notionClient.databases.query({
-        database_id: "1b129f2601944e4fad20849f53f5eab0",
+    refinedData(data) {
+      const refinedResponse = [];
+      data.forEach((page) => {
+        refinedResponse.push({
+          id: page.properties.id.number,
+          page_id: page.id,
+          title: page.properties.직무.title[0].plain_text,
+          department: page.properties.소속.select.name,
+          team: page.properties.팀.select.name,
+        });
       });
+      console.log(refinedResponse);
+      return refinedResponse;
     },
   },
 };
 </script>
+
+<style lang="scss">
+section {
+  padding: 20px 40px;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding-left: 0px;
+
+    li {
+      border-bottom: 1px solid #eaebee;
+
+      .job-tag {
+        span {
+          padding-right: 20px;
+          color: gray;
+        }
+      }
+    }
+
+    li:hover {
+      h2 {
+        color: gray;
+        transition: 500ms;
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+  }
+}
+</style>
