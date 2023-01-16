@@ -5,7 +5,7 @@
     <LoadingSpinner v-if="isLoading"></LoadingSpinner>
 
     <ul v-else>
-      <li v-for="job in notionDbList" :key="job.page_id">
+      <li class="job-list" v-for="job in notionDbList" :key="job.page_id">
         <router-link :to="job.page_id">
           <h2>{{ job.title }}</h2>
           <div class="job-tag">
@@ -75,7 +75,7 @@ section {
     list-style: none;
     padding-left: 0px;
 
-    li {
+    .job-list {
       border-bottom: 1px solid #eaebee;
 
       .job-tag {
