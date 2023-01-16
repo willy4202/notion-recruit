@@ -15,6 +15,7 @@ const routes = [
     name: "jobs",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/JobsView.vue"),
+    props: true,
   },
 ];
 
