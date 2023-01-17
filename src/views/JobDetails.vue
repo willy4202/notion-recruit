@@ -24,6 +24,7 @@
           v-if="block.type === 'paragraph'"
           v-text="block.text"
         ></p>
+
         <ul class="bulleted-list" v-if="block.type === 'bulleted_list_item'">
           <li v-text="block.text"></li>
         </ul>
@@ -52,6 +53,7 @@ export default {
     this.getPageTitle();
     this.getPageContent();
   },
+
   methods: {
     getPageTitle() {
       this.$axios

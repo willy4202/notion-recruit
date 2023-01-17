@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Jobs from "../views/Jobs.vue";
 
 Vue.use(VueRouter);
 
@@ -8,13 +8,33 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/HomeView.vue"),
   },
   {
-    path: "/:jobId",
+    path: "/jobs",
+    name: "Jobs",
+    component: Jobs,
+  },
+  {
+    path: "/jobs/:jobId",
     name: "jobs",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/JobsView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/JobDetails.vue"),
+    props: true,
+  },
+  {
+    path: "/gallery",
+    name: "gallery",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/DatabaseTestView.vue"),
+    props: true,
+  },
+  {
+    path: "/applicant",
+    name: "applicant",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ApplicantView.vue"),
     props: true,
   },
 ];
