@@ -1,10 +1,7 @@
 <template>
   <div>
-    <h1>
-      <router-link to="/jobs">jobs</router-link>
-    </h1>
-    <h1>
-      <router-link to="/gallery">gallery</router-link>
+    <h1 v-for="link in links">
+      <router-link :to="link">{{ link }}</router-link>
     </h1>
   </div>
 </template>
@@ -14,7 +11,7 @@ export default {
   components: {},
   data() {
     return {
-      example: "",
+      links: ["jobs", "gallery", "applicant"],
     };
   },
   beforeCreate() {},
