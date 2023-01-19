@@ -37,7 +37,7 @@
           name="product"
         />
       </div>
-      <button class="btn" @click.prevent="postInfo">submit</button>
+      <button class="btn" @click="postInfo">submit</button>
     </form>
   </div>
 </template>
@@ -72,16 +72,18 @@ export default {
   updated() {},
 
   methods: {
-    postInfo() {
+    async postInfo() {
       const content = { answer: this.userAnswer };
       const headers = {
         "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
         Accept: "*/*",
       };
-      this.$axios
+      await this.$axios
         .post(" http://localhost:3000/product", content, { headers })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
+
+      alert("post done");
     },
   },
 };

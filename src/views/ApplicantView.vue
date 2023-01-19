@@ -17,7 +17,6 @@
       </select>
 
       <button type="submit" @click.prevent="postApplicantInfo">Submit</button>
-      <!-- <button type="submit" @click.prevent="submitForm">check</button> -->
     </form>
   </div>
 </template>
@@ -68,8 +67,13 @@ export default {
 
   methods: {
     postApplicantInfo() {
+      const content = { data: this.fields };
+      const headers = {
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        Accept: "*/*",
+      };
       this.$axios
-        .post("http://localhost:3000/applicant")
+        .post("http://localhost:3000/applicant", content, { headers })
         .then((res) => {
           console.log(res.data);
         })
