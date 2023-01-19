@@ -11,7 +11,7 @@ export default {
   components: {},
   data() {
     return {
-      links: ["jobs", "gallery", "applicant"],
+      links: ["jobs", "gallery", "applicant", "product-form"],
     };
   },
   beforeCreate() {},

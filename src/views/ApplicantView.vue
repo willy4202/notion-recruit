@@ -11,11 +11,13 @@
           :placeholder="field.placeholder"
         />
       </div>
-      <select>
+      <select v-model="position">
         <option value="프론트엔드">프론트엔드</option>
         <option value="백엔드">백엔드</option>
       </select>
+
       <button type="submit" @click.prevent="postApplicantInfo">Submit</button>
+      <!-- <button type="submit" @click.prevent="submitForm">check</button> -->
     </form>
   </div>
 </template>
@@ -49,38 +51,31 @@ export default {
         },
         { name: "resume", label: "이력서", type: "file", value: "" },
         {
-          name: "career description",
+          name: "career",
           label: "경력기술서",
           type: "file",
           value: "",
         },
         { name: "portfolio", label: "포트폴리오", type: "file", value: "" },
-        { name: "position", label: "포지션", type: "selector", value: "" },
       ],
+      position: "",
     };
   },
 
-  created() {
-    this.getDb();
-  },
+  created() {},
 
   updated() {},
 
   methods: {
-    submitForm() {
-      console.log(this.fields);
-    },
-
-    getDb() {
-      this.$axios.get("http://localhost:3000/applicant").then((res) => {
-        console.log(res.data);
-      });
-    },
-
     postApplicantInfo() {
-      this.$axios.post("http://localhost:3000/applicant").then((res) => {
-        console.log(res.data);
-      });
+      this.$axios
+        .post("http://localhost:3000/applicant")
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

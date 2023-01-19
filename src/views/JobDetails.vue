@@ -150,7 +150,7 @@ export default {
 
 .bulleted-list {
   li {
-    list-style: disc;
+    /* list-style: disc; */
   }
 }
 </style>
