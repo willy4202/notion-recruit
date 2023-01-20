@@ -76,7 +76,9 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    console.log(process.env.VUE_APP_LOCAL_API_URL);
+  },
 
   updated() {
     console.log(this.userAnswer);
@@ -90,7 +92,9 @@ export default {
         Accept: "*/*",
       };
       this.$axios
-        .post("http://localhost:3000/applicant", content, { headers })
+        .post(process.env.VUE_APP_LOCAL_API_URL + "/applicant", content, {
+          headers,
+        })
         .then((res) => {
           console.log(res.data);
         })

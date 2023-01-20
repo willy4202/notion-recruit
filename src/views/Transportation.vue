@@ -68,18 +68,24 @@ export default {
 
   methods: {
     async postInfo() {
-      const content = { answer: this.userAnswer };
-      const headers = {
-        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        Accept: "*/*",
-      };
-      await this.$axios
-        .post(" http://localhost:3000/product", content, { headers })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-
-      alert("post done");
-      location.reload();
+      try {
+        const content = { answer: this.userAnswer };
+        const headers = {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+          Accept: "*/*",
+        };
+        const response = await this.$axios.post(
+          process.env.VUE_APP_LOCAL_API_URL + "/product",
+          content,
+          { headers }
+        );
+        console.log(response);
+        alert("post done");
+        location.reload();
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred while posting the data");
+      }
     },
   },
 };
