@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import { APPLICANT_URL } from "@/utils/apiconfig";
+
 export default {
   name: "",
   components: {},
@@ -92,7 +94,7 @@ export default {
         Accept: "*/*",
       };
       this.$axios
-        .post(process.env.VUE_APP_LOCAL_API_URL + "/applicant", content, {
+        .post(APPLICANT_URL, content, {
           headers,
         })
         .then((res) => {

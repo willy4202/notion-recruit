@@ -26,6 +26,7 @@
 import notionClient from "@/mixins/notionCleint";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import store from "@/store";
+import { JOBS_LIST_URL } from "@/utils/apiconfig";
 
 export default {
   name: "home",
@@ -40,13 +41,12 @@ export default {
 
   created() {
     this.getDatabaseList();
-    // this.setJobDetails();
   },
 
   updated() {},
   methods: {
     async getDatabaseList() {
-      this.$axios.get("http://localhost:3000/jobs").then((res) => {
+      this.$axios.get(JOBS_LIST_URL).then((res) => {
         this.notionDbList = this.refinedData(res.data.results);
         this.isLoading = false;
       });

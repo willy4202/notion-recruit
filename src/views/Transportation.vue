@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { PRODUCT_URL } from "@/utils/apiconfig";
+
 export default {
   data() {
     return {
@@ -74,17 +76,15 @@ export default {
           "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
           Accept: "*/*",
         };
-        const response = await this.$axios.post(
-          process.env.VUE_APP_LOCAL_API_URL + "/product",
-          content,
-          { headers }
-        );
+        const response = await this.$axios.post(PRODUCT_URL, content, {
+          headers,
+        });
         console.log(response);
         alert("post done");
         location.reload();
       } catch (error) {
         console.error(error);
-        alert("An error occurred while posting the data");
+        alert("필수 항목을 모두 채워주세요");
       }
     },
   },

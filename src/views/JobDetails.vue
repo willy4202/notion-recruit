@@ -35,6 +35,8 @@
   </section>
 </template>
 <script>
+import { JOBS_LIST_URL } from "@/utils/apiconfig";
+
 export default {
   name: "",
   components: {},
@@ -57,7 +59,7 @@ export default {
   methods: {
     getPageTitle() {
       this.$axios
-        .get("http://localhost:3000/jobs/title/" + this.$route.params.jobId)
+        .get(JOBS_LIST_URL + "/title/" + this.$route.params.jobId)
         .then((res) => {
           this.refinedPagesProperties(res.data);
         });
@@ -65,7 +67,7 @@ export default {
 
     getPageContent() {
       this.$axios
-        .get("http://localhost:3000/jobs/" + this.$route.params.jobId)
+        .get(JOBS_LIST_URL + "/" + this.$route.params.jobId)
         .then((res) => {
           console.log(res.data.results);
           this.refinedBlocks(res.data.results);

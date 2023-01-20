@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+import { API_BASE_URL } from "@/utils/apiconfig";
 import axios from "axios";
 
 export default {
@@ -27,7 +28,7 @@ export default {
   methods: {
     async getDb() {
       axios
-        .get("http://localhost:3000/gallery")
+        .get(API_BASE_URL + "gallery")
         .then((res) => (this.galleryData = res.data.results));
     },
   },
