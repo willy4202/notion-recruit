@@ -28,7 +28,7 @@
           name="product"
         />
       </div>
-      <button class="btn" @click="postInfo">submit</button>
+      <button class="btn" @click.prevent="postInfo">submit</button>
     </form>
   </div>
 </template>
@@ -79,6 +79,7 @@ export default {
         .catch((err) => console.log(err));
 
       alert("post done");
+      location.reload();
     },
   },
 };

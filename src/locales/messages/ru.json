@@ -1,0 +1,6 @@
+{
+  "hello": "Привет",
+  "amount": "сумма",
+  "unitPrice": "цена за единицу товара",
+  "bananaAmount": "{amount} банан |{amount} банан | {amount} банана | {amount} бананов"
+}

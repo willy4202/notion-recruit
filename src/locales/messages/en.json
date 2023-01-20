@@ -1,0 +1,6 @@
+{
+  "hello": "Hello",
+  "amount": "amount",
+  "unitPrice": "Unit Price",
+  "bananaAmount": "{amount} banana | {amount} bananas"
+}
