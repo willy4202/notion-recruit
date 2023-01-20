@@ -1,34 +1,25 @@
 <template>
   <div class="container">
     <form class="wrapper">
-      <div class="input-wrapper">
-        <label>이름</label>
-        <input type="wrapper" v-model="userAnswer.name" />
-      </div>
-      <div class="input-wrapper">
-        <label>이메일</label>
-        <input type="email" v-model="userAnswer.email" />
-      </div>
-      <div class="input-wrapper">
-        <label>전화번호</label>
-        <input type="wrapper" v-model="userAnswer.phone" />
-      </div>
-      <div class="input-wrapper">
-        <label>운행방식</label>
-        <select v-model="userAnswer.way">
-          <option value="편도">편도</option>
-          <option value="왕복">왕복</option>
+      <div class="input-wrapper" v-for="field in fields">
+        <label>{{ field.label }}</label>
+        <input
+          v-if="field.type === 'text'"
+          type="text"
+          v-model="userAnswer[field.name]"
+        />
+        <input
+          v-if="field.type === 'email'"
+          type="email"
+          v-model="userAnswer[field.name]"
+        />
+        <select v-if="field.type === 'select'" v-model="userAnswer[field.name]">
+          <option v-for="option in field.options" :value="option.value">
+            {{ option.label }}
+          </option>
         </select>
       </div>
-      <div class="input-wrapper">
-        <label>문의사항</label>
-        <input type="wrapper" v-model="userAnswer.question" />
-      </div>
-      <div
-        class="products-transportaions"
-        v-for="product in products"
-        :key="product.id"
-      >
+      <div class="input-wrapper" v-for="product in products">
         <label>{{ product.name }}</label>
         <input
           type="radio"
@@ -44,31 +35,35 @@
 
 <script>
 export default {
-  name: "",
-  components: {},
   data() {
     return {
-      products: [
-        { id: 1, img: "", value: 1, name: "스탠다드 SUV" },
-        { id: 2, img: "", value: 2, name: "스탠다드 VAN" },
-        { id: 3, img: "", value: 3, name: "프리미엄 세단" },
-        { id: 4, img: "", value: 4, name: "프리미엄 SUV" },
-        { id: 5, img: "", value: 5, name: "익스클루시브 세단" },
-        { id: 6, img: "", value: 6, name: "익스클루시브 SUV" },
+      fields: [
+        { name: "name", label: "이름", type: "text" },
+        { name: "email", label: "이메일", type: "email" },
+        { name: "phone", label: "전화번호", type: "text" },
+        {
+          name: "way",
+          label: "운행방식",
+          type: "select",
+          options: [
+            { value: "편도", label: "편도" },
+            { value: "왕복", label: "왕복" },
+          ],
+        },
+        { name: "question", label: "문의사항", type: "text" },
       ],
-
-      userAnswer: {
-        name: "",
-        email: "",
-        phone: "",
-        way: "",
-        question: "",
-        product: "",
-      },
+      products: [
+        { id: 1, name: "스탠다드 SUV" },
+        { id: 2, name: "스탠다드 VAN" },
+        { id: 3, name: "프리미엄 세단" },
+        { id: 4, name: "프리미엄 SUV" },
+        { id: 5, name: "익스클루시브 세단" },
+        { id: 6, name: "익스클루시브 SUV" },
+      ],
+      userAnswer: {},
     };
   },
-  beforeCreate() {},
-  created() {},
+
   updated() {},
 
   methods: {
