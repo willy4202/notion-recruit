@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "스탠다드 SUV", "img": "@/assets/transportation/1.jpg" },
+  { "id": 2, "name": "스탠다드 VAN", "img": "@/assets/transportation/2.jpeg" },
+  { "id": 3, "name": "프리미엄 세단", "img": "@/assets/transportation/3.jpeg" },
+  { "id": 4, "name": "프리미엄 SUV", "img": "@/assets/transportation/4.jpeg" },
+  { "id": 5, "name": "익스클루시브 세단", "img": "@/assets/transportation/5.jpeg" },
+  { "id": 6, "name": "익스클루시브 SUV", "img": "@/assets/transportation/6.jpeg" }
+]

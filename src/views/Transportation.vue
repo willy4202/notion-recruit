@@ -21,6 +21,7 @@
       </div>
       <div class="input-wrapper" v-for="product in products">
         <label>{{ product.name }}</label>
+        <!-- <img :src="product.img" /> -->
         <input
           type="radio"
           v-model="userAnswer.product"
@@ -35,6 +36,7 @@
 
 <script>
 import { PRODUCT_URL } from "@/utils/apiconfig";
+import mockData from "@/mock/transportation.json";
 
 export default {
   data() {
@@ -54,18 +56,12 @@ export default {
         },
         { name: "question", label: "문의사항", type: "text" },
       ],
-      products: [
-        { id: 1, name: "스탠다드 SUV" },
-        { id: 2, name: "스탠다드 VAN" },
-        { id: 3, name: "프리미엄 세단" },
-        { id: 4, name: "프리미엄 SUV" },
-        { id: 5, name: "익스클루시브 세단" },
-        { id: 6, name: "익스클루시브 SUV" },
-      ],
+      products: mockData,
       userAnswer: {},
     };
   },
 
+  created() {},
   updated() {},
 
   methods: {
@@ -84,7 +80,7 @@ export default {
         location.reload();
       } catch (error) {
         console.error(error);
-        alert("필수 항목을 모두 채워주세요");
+        alert(error);
       }
     },
   },

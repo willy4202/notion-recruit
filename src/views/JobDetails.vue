@@ -22,13 +22,13 @@
         <p
           class="detail-paragraph"
           v-if="block.type === 'paragraph'"
-          v-text="block.text"
+          v-html="block.text"
         ></p>
-
         <ul class="bulleted-list" v-if="block.type === 'bulleted_list_item'">
           <li v-text="block.text"></li>
         </ul>
         <p v-if="block.type === 'code'" v-text="block.text"></p>
+        <hr v-if="block.type === `divider`" />
       </div>
     </article>
     <p></p>
@@ -88,8 +88,12 @@ export default {
             this.blocks.push({
               id: block.id,
               type: block.type,
-              text: block.paragraph.rich_text[0]?.plain_text,
+              text:
+                block.paragraph.rich_text.length === 0
+                  ? "<br/>"
+                  : block.paragraph.rich_text[0].plain_text,
             });
+
             break;
           case "bulleted_list_item":
             this.blocks.push({
@@ -112,6 +116,12 @@ export default {
               type: block.type,
               text: block.image.caption[0]?.plain_text,
               url: block.image.file.url,
+            });
+            break;
+          case "divider":
+            this.blocks.push({
+              id: block.id,
+              type: block.type,
             });
             break;
         }
